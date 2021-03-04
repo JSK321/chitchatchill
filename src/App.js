@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import React, { useState, useEffect } from 'react'
-// import API from './utils/API'
+import API from './utils/API'
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Components
 import NavBar from './components/NavBar'
 import ChatBox from './components/ChatBox'
 // Pages
 import SignInPage from './pages/SignInPage'
-import API from "./utils/API";
+import HomePage from './pages/HomePage'
 
 function App() {
 
@@ -65,6 +65,9 @@ function App() {
 
       <Switch>
         <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route exact path="/chatbox">
           <ChatBox />
         </Route>
         <Route exact path="/signin">
