@@ -6,8 +6,8 @@ export default function NavBar() {
     return (
             <Navbar expand="lg" className="NavBar">
                 <Navbar.Brand href="/">Home</Navbar.Brand>
-                <Navbar.Brand href="/login">Log In</Navbar.Brand>
-                <Navbar.Brand href="/login">Sign In</Navbar.Brand>
+                <Navbar.Brand href="/signin">Sign In</Navbar.Brand>
+                <Navbar.Brand href="/signup">Sign Up</Navbar.Brand>
             </Navbar>
     )
 }
