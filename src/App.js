@@ -65,9 +65,11 @@ function App() {
 
       <Switch>
         <Route exact path="/">
-          <HomePage />
+          <HomePage 
+            profile={profileState}
+          />
         </Route>
-        <Route exact path="/chatbox">
+        <Route exact path="/:chatRoom/:id">
           <ChatBox />
         </Route>
         <Route exact path="/signin">

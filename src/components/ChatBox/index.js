@@ -6,6 +6,7 @@ export default function ChatBox() {
     return (
         <Container className="chatBox">
             <Card>
+                <Card.Header className="cardHeader">Name</Card.Header>
                 <Form.Control
                     as="textarea"
                     className="chatDisplay"
