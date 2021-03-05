@@ -20,6 +20,33 @@ const API = {
             }
         }).then(res => res.json()).catch(err => console.log(err))
     },
+    // Get One Chat Room by Id Function
+    getOneChatRoom: function(id) {
+        return fetch(`${URL_PREFIX}/api/chatrooms/${id}`, {
+        }).then(res => res.json()).catch(err => console.log(err))
+    },
+    // Get All Chat Rooms Function
+    getAllChatrooms: function () {
+        return fetch (`${URL_PREFIX}/api/chatrooms`, {
+        }).then(res => res.json()).catch(err => console.log(err))
+    },
+    // Create Chat Room Function
+    createChatRoom: function (token, data) {
+        return fetch(`${URL_PREFIX}/api/chatrooms`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(data)
+        }).then(res => {
+            if (res.ok) {
+                return res.json()
+            } else {
+                throw new Error("Something went wrong")
+            }
+        }).catch(err => console.log(err))
+    },
 };
 
 module.exports = API;

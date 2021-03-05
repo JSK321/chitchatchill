@@ -1,11 +1,17 @@
 .chatBox {
     width: 50rem;
+    margin-top: 3rem;
     /* height: 100vh; */
 }
 
 .form-control:disabled, .form-control[readonly] {
     background-color: transparent;
     opacity: 1;
+}
+
+.cardHeader {
+    background: none;
+    background-color:aliceblue;
 }
 
 textarea {
