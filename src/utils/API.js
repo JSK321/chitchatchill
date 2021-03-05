@@ -20,6 +20,11 @@ const API = {
             }
         }).then(res => res.json()).catch(err => console.log(err))
     },
+    // Get One Chat Room by Id Function
+    getOneChatRoom: function(id) {
+        return fetch(`${URL_PREFIX}/api/chatrooms/${id}`, {
+        }).then(res => res.json()).catch(err => console.log(err))
+    },
     // Get All Chat Rooms Function
     getAllChatrooms: function () {
         return fetch (`${URL_PREFIX}/api/chatrooms`, {

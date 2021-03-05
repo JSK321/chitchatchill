@@ -65,7 +65,7 @@ function App() {
 
       <Switch>
         <Route exact path="/">
-          <HomePage 
+          <HomePage
             profile={profileState}
           />
         </Route>
