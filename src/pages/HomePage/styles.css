@@ -1,0 +1,24 @@
+.homeContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+
+}
+
+.homeCard {
+    width: 40rem;
+    height: 40rem;
+    border: 1px solid black;
+}
+
+.homeButtons {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.homeNavs {
+    /* width: 100%; */
+
+}
