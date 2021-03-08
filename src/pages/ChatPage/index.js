@@ -7,28 +7,30 @@ export default function ChatPage() {
     const [chatRoomState, setChatRoomState] = useState({
         roomName: "",
         id: ""
-    })
+    });
 
     const [userState, setUserState] = useState({
         accountName: "",
         id: "",
+        token: "",
         profileImage: ""
-    })
+    });
 
     const [chatState, setChatState] = useState({
         message: "",
-        id: "",
-        ChatRoomId: "",
-        UserId: ""
+        ChatRoomId: ""
+    });
+
+    const [messageState, setMessageState] = useState({
+        messages: []
     })
 
-    const { roomName } = useParams();
     const { id } = useParams();
 
     useEffect(() => {
-        userData()
-        findChatRoom()
-    }, [])
+        userData();
+        findChatRoom();
+    }, []);
 
     function userData() {
         const token = localStorage.getItem("token");
@@ -37,27 +39,62 @@ export default function ChatPage() {
                 setUserState({
                     accountName: data.accountName,
                     id: data.id,
+                    token: token,
                     profileImage: data.profileImage
-                })
+                });
                 setChatState({
                     ...chatState,
-                    UserId: data.id
-                })
-            })
-        }
-    }
+                    ChatRoomId: id
+                });
+            });
+        };
+    };
 
     function findChatRoom() {
         API.getOneChatRoom(id).then(data => {
             setChatRoomState({
                 roomName: data.roomName,
                 id: data.id
+            });
+        });
+        getAllMessages()
+    };
+
+    function getAllMessages() {
+        API.getAllMessages(id).then(data => {
+            setMessageState({
+                messages: data
             })
         })
     }
+
+    const handleInputChange = event => {
+        const { name, value } = event.target
+        setChatState({
+            ...chatState,
+            [name]: value
+        });
+    };
+
+    const handleSendMessage = event => {
+        event.preventDefault();
+        API.createMessage(userState.token, chatState).then(after => {
+            getAllMessages()
+            setChatState({
+                ...chatState,
+                message: ""
+            })
+        })
+    };
+
     return (
-        <ChatBox 
+        <ChatBox
             roomName={chatRoomState.roomName}
+            message={chatState.message}
+            messages={messageState.messages}
+            accountName={userState.accountName}
+            handleInputChange={handleInputChange}
+            handleSendMessage={handleSendMessage}
         />
-    )
-}
+    );
+};

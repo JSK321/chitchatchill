@@ -14,9 +14,9 @@
     background-color:aliceblue;
 }
 
-textarea {
-    resize: none;
-}
+/* .chatDisplay {
+   
+} */
 
 @media screen and (max-width: 400px){
     .chatBox {
