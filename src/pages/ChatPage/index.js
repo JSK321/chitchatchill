@@ -65,7 +65,13 @@ export default function ChatPage() {
             setMessageState({
                 messages: data
             })
+            updateScroll()
         })
+    }
+
+    function updateScroll() {
+        let chatHistory = document.getElementsByClassName("chatDisplay");
+        chatHistory[0].scrollTop = chatHistory[0].scrollHeight
     }
 
     const handleInputChange = event => {
@@ -80,6 +86,7 @@ export default function ChatPage() {
         event.preventDefault();
         API.createMessage(userState.token, chatState).then(after => {
             getAllMessages()
+            updateScroll()
             setChatState({
                 ...chatState,
                 message: ""
