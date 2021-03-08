@@ -8,6 +8,7 @@ import ChatBox from './components/ChatBox'
 // Pages
 import SignInPage from './pages/SignInPage'
 import HomePage from './pages/HomePage'
+import ChatPage from './pages/ChatPage'
 
 function App() {
 
@@ -70,7 +71,7 @@ function App() {
           />
         </Route>
         <Route exact path="/:chatRoom/:id">
-          <ChatBox />
+          <ChatPage />
         </Route>
         <Route exact path="/signin">
           <SignInPage />

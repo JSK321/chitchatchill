@@ -1,78 +1,50 @@
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { Container, Card, Form } from 'react-bootstrap'
+import React from 'react'
+import { Container, Card, Form, ListGroup } from 'react-bootstrap'
 import "./styles.css"
-import API from '../../utils/API';
 
 export default function ChatBox(props) {
-    const [chatRoomState, setChatRoomState] = useState({
-        roomName: "",
-        id: ""
-    })
-
-    const [chatState, setChatState] = useState({
-        message: "",
-        id: "",
-        ChatRoomId: "",
-        UserId: ""
-    })
-
-    const [userState, setUserState] = useState({
-        accountName: "",
-        id: "",
-        profileImage: ""
-    })
-
-    const { roomName } = useParams();
-    const { id } = useParams();
-
-    useEffect(() => {
-        findChatRoom()
-    }, [])
-
-    function userData() {
-        setUserState({
-            accountName: props.profile.accountName,
-            id: props.profile.id,
-            profileImage: props.profile.profileImage
-        })
-    }
-
-    function findChatRoom() {
-        API.getOneChatRoom(id).then(data => {
-            setChatRoomState({
-                roomName: data.roomName,
-                id: data.id
-            })
-            setChatState({
-                ...chatState,
-                ChatRoomId: data.id,
-                UserId: ""
-            })
-        })
-    }
+    // props.messages.map(data => {
+    //     console.log(data.message)
+    // })
 
     return (
         <Container className="chatBox">
             <Card>
-                <Card.Header className="cardHeader">{chatRoomState.roomName}</Card.Header>
-                <Form.Control
-                    as="textarea"
+                <Card.Header className="cardHeader">{props.roomName}</Card.Header>
+                <Card.Body
                     className="chatDisplay"
-                    rows={20}
-                    readOnly
                 >
-                    Hello, this is read only.
 
-                    </Form.Control>
-                <Form>
-                    <Form.Control 
-                    type="text" 
-                    placeholder="Message" 
-                    name=""
+                    {!props.messages || props.messages < 1 ?
+                        <p>No Messages</p>
+                        :
+                        props.messages.map(data => (
+                            <div
+                                key={data.id}
+                                id={data.id}
+                            >
+                                <strong>{props.accountName}</strong>
+                                <br></br>
+                                {data.message}
+                            </div>
+                        ))
+                    }
+
+                </Card.Body>
+                <Form
+                    onSubmit={props.handleSendMessage}
+                    className="sendMessageInput"
+                >
+                    <Form.Control
+                        type="text"
+                        placeholder="Message"
+                        name="message"
+                        value={props.message}
+                        onChange={props.handleInputChange}
+                        autoComplete="off"
                     />
                 </Form>
             </Card>
-        </Container>
+        </Container >
     )
 }
