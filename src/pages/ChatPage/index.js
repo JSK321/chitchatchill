@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import moment from 'moment'
 import API from '../../utils/API';
 import ChatBox from '../../components/ChatBox'
 
@@ -27,6 +26,7 @@ export default function ChatPage() {
     })
 
     const { id } = useParams();
+    const { chatRoom } = useParams();
 
     useEffect(() => {
         userData();
