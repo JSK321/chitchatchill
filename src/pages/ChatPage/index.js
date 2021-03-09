@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import moment from 'moment'
 import API from '../../utils/API';
 import ChatBox from '../../components/ChatBox'
 
@@ -94,6 +95,7 @@ export default function ChatPage() {
         })
     };
 
+    
     return (
         <ChatBox
             roomName={chatRoomState.roomName}

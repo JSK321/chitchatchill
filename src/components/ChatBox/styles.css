@@ -17,6 +17,15 @@
    overflow-x:hidden;
 }
 
+.chatMessage {
+    border: 1px solid cornflowerblue;
+}
+
+.createdAtTime {
+    opacity: .5;
+    font-size: smaller;
+}
+
 @media screen and (max-height: 400px){
     body {
         height: 100%
