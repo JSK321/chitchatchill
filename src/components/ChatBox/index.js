@@ -6,26 +6,26 @@ export default function ChatBox(props) {
     return (
         <Card className="chatBox">
             <Card.Header className="cardHeader">{props.roomName}</Card.Header>
-            <Card.Body
-                className="chatDisplay"
-            >
-
+            <ListGroup className="chatDisplay">
                 {!props.messages || props.messages < 1 ?
                     <p>No Messages</p>
                     :
                     props.messages.map(data => (
-                        <div
+                        <ListGroup.Item
                             key={data.id}
                             id={data.id}
+                            className="chatMessage"
                         >
                             <strong>{props.accountName}</strong>
+                            <span className="createdAtTime">
+                                {" " + data.createdAt.slice(0, -8) + "at" + " " + data.createdAt.slice(11)}
+                            </span>
                             <br></br>
                             {data.message}
-                        </div>
+                        </ListGroup.Item>
                     ))
                 }
-
-            </Card.Body>
+            </ListGroup>
             <Form
                 onSubmit={props.handleSendMessage}
                 className="sendMessageInput"
