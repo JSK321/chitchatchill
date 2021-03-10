@@ -38,6 +38,7 @@ export default function ChatPage() {
         userData();
         findChatRoom();
     }, []);
+    
     // Function to retrieve user data
     function userData() {
         const token = localStorage.getItem("token");
@@ -49,14 +50,6 @@ export default function ChatPage() {
                     token: token,
                     profileImage: data.profileImage
                 });
-                setChatState({
-                    ...chatState,
-                    ChatRoomId: id
-                });
-                setEditChatState({
-                    ...editChatState,
-                    ChatRoomId: id
-                })
             });
         };
     };
@@ -67,6 +60,14 @@ export default function ChatPage() {
                 roomName: data.roomName,
                 id: data.id
             });
+            setChatState({
+                ...chatState,
+                ChatRoomId: id
+            });
+            setEditChatState({
+                ...editChatState,
+                ChatRoomId: id
+            })
         });
         getAllMessages();
     };
@@ -115,16 +116,14 @@ export default function ChatPage() {
                 openForm[i].previousSibling.hidden = false
             }
         }
-
         if (editForm.hidden === true) {
             editForm.hidden = false
             message.hidden = true
         }
         // console.log(chatHistory[0].scrollTop)
-        if (chatHistory[0].scrollTop > 0) {
-            updateScroll();
-        }
-
+        // if (chatHistory[0].scrollTop > 0) {
+        //     updateScroll();
+        // }
         API.getOneMessage(id).then(data => {
             setEditChatState({
                 ...editChatState,
@@ -149,15 +148,15 @@ export default function ChatPage() {
     // Function to handle cancel button
     const handleCancelBtn = event => {
         event.preventDefault();
-        let editParent = event.target.parentNode;
-        let id = editParent.id.slice(11);
+        let editGrandParent = event.target.parentNode.parentNode;
+        let id = editGrandParent.id.slice(11);
         let message = document.getElementById(`message${id}`);
-        if (editParent.hidden === false) {
-            editParent.hidden = true
+        if (editGrandParent.hidden === false) {
+            editGrandParent.hidden = true
             message.hidden = false
         };
     };
-    // Function to post new message in chat room
+    // Function to post new message in chatroom
     const handleSendMessage = event => {
         event.preventDefault();
         API.createMessage(userState.token, chatState).then(after => {
@@ -169,6 +168,14 @@ export default function ChatPage() {
             });
         });
     };
+    // Function to delete message in chatroom
+    const handleDeleteMessage = event => {
+        event.preventDefault();
+        let id = event.currentTarget.parentNode.parentNode.parentNode.children[3].id.slice(7)
+        API.deleteOneMessage(userState.token, id).then(after => {
+            getAllMessages();
+        })
+    }
 
 
     return (
@@ -186,6 +193,7 @@ export default function ChatPage() {
             handleCancelBtn={handleCancelBtn}
             handleSendMessage={handleSendMessage}
             handleEditInputChange={handleEditInputChange}
+            handleDeleteMessage={handleDeleteMessage}
         />
     );
 };

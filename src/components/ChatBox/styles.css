@@ -45,13 +45,16 @@
     color: blue;
 }
 
-.cancelBtn, .cancelBtn:link, .cancelBtn:hover, .cancelBtn:active, .cancelBtn:focus, .cancelBtn:visited {
-    position: absolute;
-    right: 0;
-    margin-right: 1.5rem;
+.CancelOrDelete, .CancelOrDelete:link, .CancelOrDelete:hover, .CancelOrDelete:active, .CancelOrDelete:focus, .CancelOrDeleteBtn:visited {
     border: none;
     background: none;
     color: blue;
+}
+
+.editBtnGroup {
+    position: absolute;
+    right: 0;
+    margin-right: 1.5rem;
 }
 
 

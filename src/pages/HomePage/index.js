@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Card, Container, Button, ButtonGroup, Nav, ListGroup } from 'react-bootstrap'
+import { Card, Container, ButtonGroup, ListGroup } from 'react-bootstrap'
 import CreateChatModal from '../../components/CreateChatModal'
 import API from '../../utils/API';
 import "./styles.css"

@@ -20,6 +20,11 @@ const API = {
             }
         }).then(res => res.json()).catch(err => console.log(err))
     },
+    // Get All Profile Function
+    getAllProfile: function() {
+        return fetch(`${URL_PREFIX}/api/users`, {
+        }).then(res => res.json()).catch(err => console.log(err))
+    },
     // Get One Chat Room by Id Function
     getOneChatRoom: function (id) {
         return fetch(`${URL_PREFIX}/api/chatrooms/${id}`, {
@@ -92,6 +97,21 @@ const API = {
                 throw new Error("Something went wrong")
             }
         }).catch(err => console.log(err))
+    },
+    // Delete Specific Message Function
+    deleteOneMessage: function(token, id) {
+        return fetch(`${URL_PREFIX}/api/chitchats/message/${id}`, {
+            method: "DELETE",
+            headers: {
+                'authorization': `Bearer ${token}`
+            }
+        }).then(res => {
+            if(res.ok){
+                console.log(res.statusText);
+            } else {
+                throw new Error ("Something went wrong");
+            }
+        }).catch(err => console.log(err));
     },
 };
 

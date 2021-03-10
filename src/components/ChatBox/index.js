@@ -20,7 +20,7 @@ export default function ChatBox(props) {
                             className="chatMessage"
                         >
                             {/* User Account Name */}
-                            <strong>{props.accountName}</strong>
+                            <strong>{data.userName}</strong>
 
                             {/* TimeStamp */}
                             <span className="createdAtTime">
@@ -28,13 +28,16 @@ export default function ChatBox(props) {
                             </span>
 
                             {/* Edit Icon */}
-                            <FontAwesomeIcon
-                                icon={faEdit}
-                                className="editIcon"
-                                onClick={props.handleEditMessage}
-                                id={data.id}
-                            />
-
+                            {props.accountName === data.userName ?
+                                <FontAwesomeIcon
+                                    icon={faEdit}
+                                    className="editIcon"
+                                    onClick={props.handleEditMessage}
+                                    id={data.id}
+                                />
+                                :
+                                null
+                            }
                             {/* Chat Message */}
                             <p
                                 id={`message${data.id}`}
@@ -64,13 +67,23 @@ export default function ChatBox(props) {
                                 >
                                     Save
                                 </Button>
-                                <Button
-                                    className="cancelBtn"
-                                    onClick={props.handleCancelBtn}
-                                    size="sm"
-                                >
-                                    Cancel
-                                </Button>
+                                <ButtonGroup className="editBtnGroup">
+                                    <Button
+                                        onClick={props.handleDeleteMessage}
+                                        className="CancelOrDelete"
+                                        size="sm"
+                                        style={{color:"red"}}
+                                    >
+                                        Delete
+                                    </Button>
+                                    <Button
+                                        onClick={props.handleCancelBtn}
+                                        className="CancelOrDelete"
+                                        size="sm"
+                                    >
+                                        Cancel
+                                    </Button>
+                                </ButtonGroup>
                             </Form>
 
                         </ListGroup.Item>
