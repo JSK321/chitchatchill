@@ -21,24 +21,24 @@ const API = {
         }).then(res => res.json()).catch(err => console.log(err))
     },
     // Get One Chat Room by Id Function
-    getOneChatRoom: function(id) {
+    getOneChatRoom: function (id) {
         return fetch(`${URL_PREFIX}/api/chatrooms/${id}`, {
         }).then(res => res.json()).catch(err => console.log(err))
     },
     // Get All Chat Rooms Function
     getAllChatrooms: function () {
-        return fetch (`${URL_PREFIX}/api/chatrooms`, {
+        return fetch(`${URL_PREFIX}/api/chatrooms`, {
         }).then(res => res.json()).catch(err => console.log(err))
     },
     // Get All Messages in Chat Function
-    getAllMessages: function(id) {
-        return fetch(`${URL_PREFIX}/api/chitchats/${id}`, {
-        }).then(res =>  res.json()).catch(err => console.log(err))
+    getAllMessages: function (id) {
+        return fetch(`${URL_PREFIX}/api/chitchats/chatRoom/${id}`, {
+        }).then(res => res.json()).catch(err => console.log(err))
     },
     // Get One Message in Chat Function
-    getOneMessage: function(id){
+    getOneMessage: function (id) {
         return fetch(`${URL_PREFIX}/api/chitchats/message/${id}`, {
-        }).then(res =>  res.json()).catch(err => console.log(err))
+        }).then(res => res.json()).catch(err => console.log(err))
     },
     // Create Chat Room Function
     createChatRoom: function (token, data) {
@@ -58,19 +58,38 @@ const API = {
         }).catch(err => console.log(err))
     },
     // Create Message Function
-    createMessage: function(token, data) {
+    createMessage: function (token, data) {
         return fetch(`${URL_PREFIX}/api/chitchats`, {
-            method:"POST",
+            method: "POST",
             headers: {
                 'Content-Type': 'application/json',
                 'authorization': `Bearer ${token}`
             },
             body: JSON.stringify(data)
         }).then(res => {
-            if(res.ok) {
+            if (res.ok) {
                 return res.json()
             } else {
                 throw new Error("Something went wrong");
+            }
+        }).catch(err => console.log(err))
+    },
+    // Update Specific Message Function
+    updateOneMessage: function (token, id, data) {
+        return fetch(`${URL_PREFIX}/api/chitchats/message/${id}`, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                message: data
+            })
+        }).then(res => {
+            if(res.ok) {
+                return res.json()
+            } else {
+                throw new Error("Something went wrong")
             }
         }).catch(err => console.log(err))
     },

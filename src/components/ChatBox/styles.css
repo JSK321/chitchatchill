@@ -26,6 +26,36 @@
     font-size: smaller;
 }
 
+.editIcon {
+    position: absolute;
+    margin-right: .5rem;
+    right: 0;
+    color: dimgrey;
+    cursor: pointer;
+}
+
+.editChatMessage {
+    resize: none;
+}
+
+.saveBtn, .saveBtn:link, .saveBtn:hover, .saveBtn:active, .saveBtn:focus, .saveBtn:visited {
+    margin-left: .3rem;
+    border: none;
+    background: none;
+    color: blue;
+}
+
+.cancelBtn, .cancelBtn:link, .cancelBtn:hover, .cancelBtn:active, .cancelBtn:focus, .cancelBtn:visited {
+    position: absolute;
+    right: 0;
+    margin-right: 1.5rem;
+    border: none;
+    background: none;
+    color: blue;
+}
+
+
+
 @media screen and (max-height: 400px){
     body {
         height: 100%
@@ -46,4 +76,9 @@
         height: 100vh;
         margin-top: 0;
     }
+    .chatDisplay {
+        height: 100vh;
+        overflow:auto;
+        overflow-x:hidden;
+     }
 }

@@ -4,7 +4,6 @@ import API from './utils/API'
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Components
 import NavBar from './components/NavBar'
-import ChatBox from './components/ChatBox'
 // Pages
 import SignInPage from './pages/SignInPage'
 import HomePage from './pages/HomePage'
