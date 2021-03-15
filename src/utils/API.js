@@ -22,7 +22,7 @@ const API = {
         }).then(res => res.json()).catch(err => console.log(err))
     },
     // Get All Profile Function
-    getAllProfile: function() {
+    getAllProfile: function () {
         return fetch(`${URL_PREFIX}/api/users`, {
         }).then(res => res.json()).catch(err => console.log(err))
     },
@@ -45,6 +45,25 @@ const API = {
     getOneMessage: function (id) {
         return fetch(`${URL_PREFIX}/api/chitchats/message/${id}`, {
         }).then(res => res.json()).catch(err => console.log(err))
+    },
+    // Create New User Function
+    createNewUser: function (data) {
+        return fetch(`${URL_PREFIX}/api/users`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(res => {
+            if (res.ok) {
+                return res.json()
+            } else if (res.status === 409) {
+                alert("Account name/Email is already in use.")
+            } else {
+                alert("Account name/Email is already in use.")
+                throw new Error("Something went wrong")
+            }
+        }).catch(err => null)
     },
     // Create Chat Room Function
     createChatRoom: function (token, data) {
@@ -92,7 +111,7 @@ const API = {
                 message: data
             })
         }).then(res => {
-            if(res.ok) {
+            if (res.ok) {
                 return res.json()
             } else {
                 throw new Error("Something went wrong")
@@ -100,17 +119,17 @@ const API = {
         }).catch(err => console.log(err))
     },
     // Delete Specific Message Function
-    deleteOneMessage: function(token, id) {
+    deleteOneMessage: function (token, id) {
         return fetch(`${URL_PREFIX}/api/chitchats/message/${id}`, {
             method: "DELETE",
             headers: {
                 'authorization': `Bearer ${token}`
             }
         }).then(res => {
-            if(res.ok){
+            if (res.ok) {
                 console.log(res.statusText);
             } else {
-                throw new Error ("Something went wrong");
+                throw new Error("Something went wrong");
             }
         }).catch(err => console.log(err));
     },
