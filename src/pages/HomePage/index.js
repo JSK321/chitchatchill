@@ -54,10 +54,11 @@ export default function HomePage(props) {
                         <ListGroup.Item>No Rooms available</ListGroup.Item>
                         :
                         roomState.chatRooms.map(data => (
-                            <ListGroup.Item>
+                            <ListGroup.Item
+                                key={data.id}
+                            >
                                 <Link
                                     to={`/${data.roomName}/${data.id}`}
-                                    key={data.id}
                                 >
                                     {data.roomName}
                                 </Link>

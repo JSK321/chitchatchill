@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Form, ListGroup, Button, ButtonGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faReply } from '@fortawesome/free-solid-svg-icons'
 import "./styles.css"
 
 export default function ChatBox(props) {
@@ -16,7 +16,6 @@ export default function ChatBox(props) {
                     props.messages.map(data => (
                         <ListGroup.Item
                             key={data.id}
-                            // id={`message${data.id}`}
                             className="chatMessage"
                         >
                             {/* User Account Name */}
@@ -27,7 +26,7 @@ export default function ChatBox(props) {
                                 {" " + data.createdAt.slice(0, -8) + "at" + " " + data.createdAt.slice(11)}
                             </span>
 
-                            {/* Edit Icon */}
+                            {/* Edit & Reply Icon */}
                             {props.accountName === data.userName ?
                                 <FontAwesomeIcon
                                     icon={faEdit}
@@ -36,7 +35,12 @@ export default function ChatBox(props) {
                                     id={data.id}
                                 />
                                 :
-                                null
+                                <FontAwesomeIcon
+                                icon={faReply}
+                                className="editIcon"
+                                // onClick={props.handleEditMessage}m
+                                id={data.id}
+                            />
                             }
                             {/* Chat Message */}
                             <p
@@ -49,7 +53,7 @@ export default function ChatBox(props) {
                             <Form
                                 id={`editMessage${data.id}`}
                                 className="editForm"
-                                hidden="true"
+                                hidden={true}
                             >
                                 <Form.Control
                                     as="textarea"
@@ -60,6 +64,7 @@ export default function ChatBox(props) {
                                     value={props.editMessage}
                                     onChange={props.handleEditInputChange}
                                 />
+                                {/* Save Button */}
                                 <Button
                                     className="saveBtn"
                                     onClick={props.handleSaveBtn}
@@ -67,6 +72,7 @@ export default function ChatBox(props) {
                                 >
                                     Save
                                 </Button>
+                                {/* Delete and Cancel Buttons */}
                                 <ButtonGroup className="editBtnGroup">
                                     <Button
                                         onClick={props.handleDeleteMessage}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import API from '../../utils/API';
 import ChatBox from '../../components/ChatBox';
@@ -31,14 +31,27 @@ export default function ChatPage() {
     const [messageState, setMessageState] = useState({
         messages: []
     });
-    // param of id on chatroom
+    // Boolean State to indicate new message in chatroom
+    const [newMessageState, setNewMessageState] = useState({
+        newMessages: []
+    });
+    // Param of id on chatroom
     const { id } = useParams();
 
+    // Find user data and chatroom data on load
     useEffect(() => {
         userData();
         findChatRoom();
+        // getAllMessages()
     }, []);
-    
+    // Update messages in chatroom on changes
+    useEffect(() => {
+        function updateMessages() {
+            getAllMessages()
+        }
+        updateMessages()
+    }, [newMessageState])
+
     // Function to retrieve user data
     function userData() {
         const token = localStorage.getItem("token");
@@ -69,7 +82,7 @@ export default function ChatPage() {
                 ChatRoomId: id
             })
         });
-        getAllMessages();
+        // getAllMessages();
     };
     // Function to retrieve all messages in chatroom
     function getAllMessages() {
@@ -120,10 +133,15 @@ export default function ChatPage() {
             editForm.hidden = false
             message.hidden = true
         }
-        // console.log(chatHistory[0].scrollTop)
-        // if (chatHistory[0].scrollTop > 0) {
-        //     updateScroll();
-        // }
+        if (chatHistory[0].clientHeight > 0) {
+            // updateScroll();
+            // console.log(chatHistory)
+            // console.log(chatHistory[0].clientHeight)
+            // console.log(chatHistory[0].scrollTop)
+            // console.log(chatHistory[0].scrollHeight)
+            // console.log(chatHistory[0].scrollHeight - chatHistory[0].scrollTop)
+            // chatHistory[0].scrollHeight - chatHistory[0].scrollTop
+        }
         API.getOneMessage(id).then(data => {
             setEditChatState({
                 ...editChatState,
@@ -137,8 +155,9 @@ export default function ChatPage() {
         let editParent = event.target.parentNode;
         let id = editParent.id.slice(11);
         let message = document.getElementById(`message${id}`);
-        API.updateOneMessage(userState.token, id, editChatState.editMessage).then(after => {
-            getAllMessages();
+        API.updateOneMessage(userState.token, id, editChatState.editMessage).then(res => {
+            // getAllMessages();
+            // setNewMessageState(true)
         })
         if (editParent.hidden === false) {
             editParent.hidden = true
@@ -159,24 +178,31 @@ export default function ChatPage() {
     // Function to post new message in chatroom
     const handleSendMessage = event => {
         event.preventDefault();
-        API.createMessage(userState.token, chatState).then(after => {
-            getAllMessages();
+        API.createMessage(userState.token, chatState).then(res => {
+            // getAllMessages();
+            let createdMessage = res
+            newMessageState.newMessages.push(createdMessage)
+            let allMessages = messageState.messages.concat(newMessageState.newMessages)
+            setMessageState({
+                messages: allMessages
+            })
             updateScroll();
             setChatState({
                 ...chatState,
                 message: ""
             });
+            // setNewMessageState(true)
         });
     };
     // Function to delete message in chatroom
     const handleDeleteMessage = event => {
         event.preventDefault();
-        let id = event.currentTarget.parentNode.parentNode.parentNode.children[3].id.slice(7)
+        let id = event.currentTarget.parentNode.parentNode.parentNode.children[3].id.slice(7);
         API.deleteOneMessage(userState.token, id).then(after => {
             getAllMessages();
-        })
-    }
-
+            // setNewMessageState(true)
+        });
+    };
 
     return (
         <ChatBox
