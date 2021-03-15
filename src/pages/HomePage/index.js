@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Card, Container, Button, ButtonGroup, Nav, ListGroup } from 'react-bootstrap'
+import { Card, Container, ButtonGroup, ListGroup } from 'react-bootstrap'
 import CreateChatModal from '../../components/CreateChatModal'
 import API from '../../utils/API';
 import "./styles.css"
@@ -54,10 +54,11 @@ export default function HomePage(props) {
                         <ListGroup.Item>No Rooms available</ListGroup.Item>
                         :
                         roomState.chatRooms.map(data => (
-                            <ListGroup.Item>
+                            <ListGroup.Item
+                                key={data.id}
+                            >
                                 <Link
                                     to={`/${data.roomName}/${data.id}`}
-                                    key={data.id}
                                 >
                                     {data.roomName}
                                 </Link>

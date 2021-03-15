@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Form, ListGroup, Button, ButtonGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faReply } from '@fortawesome/free-solid-svg-icons'
 import "./styles.css"
 
 export default function ChatBox(props) {
@@ -16,25 +16,32 @@ export default function ChatBox(props) {
                     props.messages.map(data => (
                         <ListGroup.Item
                             key={data.id}
-                            // id={`message${data.id}`}
                             className="chatMessage"
                         >
                             {/* User Account Name */}
-                            <strong>{props.accountName}</strong>
+                            <strong>{data.userName}</strong>
 
                             {/* TimeStamp */}
                             <span className="createdAtTime">
                                 {" " + data.createdAt.slice(0, -8) + "at" + " " + data.createdAt.slice(11)}
                             </span>
 
-                            {/* Edit Icon */}
-                            <FontAwesomeIcon
-                                icon={faEdit}
+                            {/* Edit & Reply Icon */}
+                            {props.accountName === data.userName ?
+                                <FontAwesomeIcon
+                                    icon={faEdit}
+                                    className="editIcon"
+                                    onClick={props.handleEditMessage}
+                                    id={data.id}
+                                />
+                                :
+                                <FontAwesomeIcon
+                                icon={faReply}
                                 className="editIcon"
-                                onClick={props.handleEditMessage}
+                                // onClick={props.handleEditMessage}m
                                 id={data.id}
                             />
-
+                            }
                             {/* Chat Message */}
                             <p
                                 id={`message${data.id}`}
@@ -46,7 +53,7 @@ export default function ChatBox(props) {
                             <Form
                                 id={`editMessage${data.id}`}
                                 className="editForm"
-                                hidden="true"
+                                hidden={true}
                             >
                                 <Form.Control
                                     as="textarea"
@@ -57,6 +64,7 @@ export default function ChatBox(props) {
                                     value={props.editMessage}
                                     onChange={props.handleEditInputChange}
                                 />
+                                {/* Save Button */}
                                 <Button
                                     className="saveBtn"
                                     onClick={props.handleSaveBtn}
@@ -64,13 +72,24 @@ export default function ChatBox(props) {
                                 >
                                     Save
                                 </Button>
-                                <Button
-                                    className="cancelBtn"
-                                    onClick={props.handleCancelBtn}
-                                    size="sm"
-                                >
-                                    Cancel
-                                </Button>
+                                {/* Delete and Cancel Buttons */}
+                                <ButtonGroup className="editBtnGroup">
+                                    <Button
+                                        onClick={props.handleDeleteMessage}
+                                        className="CancelOrDelete"
+                                        size="sm"
+                                        style={{color:"red"}}
+                                    >
+                                        Delete
+                                    </Button>
+                                    <Button
+                                        onClick={props.handleCancelBtn}
+                                        className="CancelOrDelete"
+                                        size="sm"
+                                    >
+                                        Cancel
+                                    </Button>
+                                </ButtonGroup>
                             </Form>
 
                         </ListGroup.Item>
