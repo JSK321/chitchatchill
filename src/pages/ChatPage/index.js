@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import API from '../../utils/API';
 import ChatBox from '../../components/ChatBox';
 
-
 export default function ChatPage() {
     // useState of chatroom
     const [chatRoomState, setChatRoomState] = useState({
@@ -205,21 +204,21 @@ export default function ChatPage() {
     };
 
     return (
-        <ChatBox
-            // States
-            roomName={chatRoomState.roomName}
-            message={chatState.message}
-            messages={messageState.messages}
-            editMessage={editChatState.editMessage}
-            accountName={userState.accountName}
-            // Handle Events
-            handleInputChange={handleInputChange}
-            handleEditMessage={handleEditMessage}
-            handleSaveBtn={handleSaveBtn}
-            handleCancelBtn={handleCancelBtn}
-            handleSendMessage={handleSendMessage}
-            handleEditInputChange={handleEditInputChange}
-            handleDeleteMessage={handleDeleteMessage}
-        />
+            <ChatBox
+                // States
+                roomName={chatRoomState.roomName}
+                message={chatState.message}
+                messages={messageState.messages}
+                editMessage={editChatState.editMessage}
+                accountName={userState.accountName}
+                // Handle Events
+                handleInputChange={handleInputChange}
+                handleEditMessage={handleEditMessage}
+                handleSaveBtn={handleSaveBtn}
+                handleCancelBtn={handleCancelBtn}
+                handleSendMessage={handleSendMessage}
+                handleEditInputChange={handleEditInputChange}
+                handleDeleteMessage={handleDeleteMessage}
+            />
     );
 };

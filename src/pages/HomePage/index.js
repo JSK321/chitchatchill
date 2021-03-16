@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Card, Container, ButtonGroup, ListGroup } from 'react-bootstrap'
+import { Card, Container, ButtonGroup, ListGroup, Form } from 'react-bootstrap'
+import { useTheme } from '../../contexts/ThemeContext'
 import CreateChatModal from '../../components/CreateChatModal'
 import API from '../../utils/API';
 import "./styles.css"
+
 
 export default function HomePage(props) {
     const [chatRoomState, setChatRoomState] = useState({
@@ -13,6 +15,13 @@ export default function HomePage(props) {
     const [roomState, setRoomState] = useState({
         chatRooms: []
     })
+    // Theme Context
+    const darkTheme = useTheme()
+  
+    const themeStyles = {
+        backgroundColor: darkTheme ? '#333' : '#CCC',
+        color: darkTheme ? '#CCC' : '#333',
+    }
 
     useEffect(() => {
         getAllChatRooms()
@@ -47,8 +56,13 @@ export default function HomePage(props) {
 
     return (
         <Container className="homeContainer">
-            <Card className="homeCard">
-                <Card.Header>Chat Rooms</Card.Header>
+            <Card
+                className="homeCard"
+                style={themeStyles}
+            >
+                <Card.Header>
+                    Chat Rooms
+                </Card.Header>
                 <ListGroup>
                     {!roomState.chatRooms || roomState.chatRooms < 1 ?
                         <ListGroup.Item>No Rooms available</ListGroup.Item>
@@ -56,6 +70,8 @@ export default function HomePage(props) {
                         roomState.chatRooms.map(data => (
                             <ListGroup.Item
                                 key={data.id}
+                                style={themeStyles}
+                                className="chatrooms"
                             >
                                 <Link
                                     to={`/${data.roomName}/${data.id}`}
