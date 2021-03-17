@@ -10,7 +10,7 @@ export function useThemeUpdate() {
     return useContext(ThemeUpdateContext)
 }
 
-export default function ThemeProvider({ children }) {
+export function ThemeProvider({ children }) {
     const [darkThemeState, setDarkThemeState] = useState(true)
 
     function toggleTheme() {
