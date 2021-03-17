@@ -15,7 +15,11 @@ export default function CreateChatModal(props) {
 
     return (
         <>
-            <Button variant="primary" onClick={() => setModalShow(true)}>
+            <Button 
+            className="rounded-0"
+            variant="primary" 
+            onClick={() => setModalShow(true)}
+            >
                 Create Chat Room
             </Button>
 
@@ -39,7 +43,7 @@ export default function CreateChatModal(props) {
                         // required
                     />
                     <Button
-                        className="modalBtns"
+                        className="modalBtns rounded-0"
                         type="submit"
                         onClick={() => setModalShow(false)}
                     >

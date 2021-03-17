@@ -121,6 +121,7 @@ export default function ChatBox(props) {
                     onChange={props.handleInputChange}
                     autoComplete="off"
                     style={themeStyles}
+                    className="rounded-0"
                 />
             </Form>
 

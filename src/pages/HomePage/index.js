@@ -56,7 +56,7 @@ export default function HomePage(props) {
     const handleCreateChatRoom = event => {
         event.preventDefault();
         if (profileState.isLoggedIn === true) {
-            if(!createChatRoomState.roomName){
+            if (!createChatRoomState.roomName) {
                 alert("Chatroom must have a name, please try again.")
             } else {
                 API.createChatRoom(profileState.token, {
