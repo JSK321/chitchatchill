@@ -1,9 +1,16 @@
+// React
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Card, Container, ButtonGroup, ListGroup } from 'react-bootstrap'
-import { useTheme } from '../../contexts/ThemeContext'
-import CreateChatModal from '../../components/CreateChatModal'
+// API
 import API from '../../utils/API';
+// Bootstrap
+import { Card, Container, ButtonGroup, ListGroup } from 'react-bootstrap'
+// Components
+import CreateChatModal from '../../components/CreateChatModal'
+// Contexts
+import { useTheme } from '../../contexts/ThemeContext'
+import { useProfile, useProfileData } from '../../contexts/ProfileContext'
+// CSS
 import "./styles.css"
 
 
@@ -15,6 +22,9 @@ export default function HomePage(props) {
     const [roomState, setRoomState] = useState({
         chatRooms: []
     })
+    // Profile Context
+    const profileState = useProfile()
+    const profileData = useProfileData()
     // Theme Context
     const darkTheme = useTheme()
 
@@ -24,6 +34,7 @@ export default function HomePage(props) {
     }
 
     useEffect(() => {
+        profileData()
         getAllChatRooms()
     }, [])
 
@@ -44,8 +55,8 @@ export default function HomePage(props) {
 
     const handleCreateChatRoom = event => {
         event.preventDefault();
-        if (props.profile.isLoggedIn === true) {
-            API.createChatRoom(props.profile.token, {
+        if (profileState.isLoggedIn === true) {
+            API.createChatRoom(profileState.token, {
                 ...chatRoomState
             }).then(afterCreate => {
                 getAllChatRooms()
