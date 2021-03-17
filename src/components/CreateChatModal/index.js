@@ -7,10 +7,19 @@ export default function CreateChatModal(props) {
 
     const handleOnHide = () => setModalShow(false);
 
+    function checkChatRoomName() {
+        if(props.roomName === "") {
+            console.log("here")
+        }
+    }
 
     return (
         <>
-            <Button variant="primary" onClick={() => setModalShow(true)}>
+            <Button 
+            className="rounded-0"
+            variant="primary" 
+            onClick={() => setModalShow(true)}
+            >
                 Create Chat Room
             </Button>
 
@@ -21,7 +30,7 @@ export default function CreateChatModal(props) {
             >
                 <Modal.Header closeButton>
                     <Modal.Title >
-                        Modal heading
+                        Create Chatroom
                     </Modal.Title>
                 </Modal.Header>
                 <Form onSubmit={props.handleCreateChatRoom}>
@@ -31,10 +40,10 @@ export default function CreateChatModal(props) {
                         name="roomName"
                         value={props.roomName}
                         onChange={props.handleInputChange}
-                        
+                        // required
                     />
                     <Button
-                        className="modalBtns"
+                        className="modalBtns rounded-0"
                         type="submit"
                         onClick={() => setModalShow(false)}
                     >

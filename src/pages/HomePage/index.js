@@ -15,11 +15,11 @@ import "./styles.css"
 
 
 export default function HomePage(props) {
-    const [chatRoomState, setChatRoomState] = useState({
+    const [createChatRoomState, setCreateChatRoomState] = useState({
         roomName: ""
     });
 
-    const [roomState, setRoomState] = useState({
+    const [chatRoomState, setChatRoomState] = useState({
         chatRooms: []
     })
     // Profile Context
@@ -40,14 +40,14 @@ export default function HomePage(props) {
 
     function getAllChatRooms() {
         API.getAllChatrooms().then(data => {
-            setRoomState({
+            setChatRoomState({
                 chatRooms: data
             })
         })
     }
     const handleInputChange = event => {
         const { name, value } = event.target;
-        setChatRoomState({
+        setCreateChatRoomState({
             ...chatRoomState,
             [name]: value
         });
@@ -56,11 +56,17 @@ export default function HomePage(props) {
     const handleCreateChatRoom = event => {
         event.preventDefault();
         if (profileState.isLoggedIn === true) {
-            API.createChatRoom(profileState.token, {
-                ...chatRoomState
-            }).then(afterCreate => {
-                getAllChatRooms()
-            })
+            if (!createChatRoomState.roomName) {
+                alert("Chatroom must have a name, please try again.")
+            } else {
+                API.createChatRoom(profileState.token, {
+                    ...createChatRoomState
+                }).then(afterCreate => {
+                    getAllChatRooms()
+                })
+            }
+        } else {
+            alert("Log in to create chat room.")
         };
     };
 
@@ -74,7 +80,7 @@ export default function HomePage(props) {
                     Chat Rooms
                 </Card.Header>
                 <ListGroup>
-                    {!roomState.chatRooms || roomState.chatRooms < 1 ?
+                    {!chatRoomState.chatRooms || chatRoomState.chatRooms < 1 ?
                         <ListGroup.Item
                             className="chatrooms"
                             style={themeStyles}
@@ -82,7 +88,7 @@ export default function HomePage(props) {
                             No Rooms available
                         </ListGroup.Item>
                         :
-                        roomState.chatRooms.map(data => (
+                        chatRoomState.chatRooms.map(data => (
                             <ListGroup.Item
                                 key={data.id}
                                 style={themeStyles}
@@ -99,7 +105,7 @@ export default function HomePage(props) {
                 </ListGroup>
                 <ButtonGroup vertical className="homeButtons">
                     <CreateChatModal
-                        roomName={chatRoomState.roomName}
+                        roomName={createChatRoomState.roomName}
                         handleInputChange={handleInputChange}
                         handleCreateChatRoom={handleCreateChatRoom}
                     />
