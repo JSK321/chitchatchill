@@ -31,11 +31,12 @@ export default function CreateChatModal(props) {
                         name="roomName"
                         value={props.roomName}
                         onChange={props.handleInputChange}
-                        required
+                        
                     />
                     <Button
                         className="modalBtns"
                         type="submit"
+                        onClick={() => setModalShow(false)}
                     >
                         Create
                     </Button>

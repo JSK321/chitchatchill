@@ -20,7 +20,7 @@ export function SocketProvider({ id, children }) {
     }, [id])
 
     return (
-        <SocketContext.Provider value={socket}>
+        <SocketContext.Provider value={socketState}>
             {children}
         </SocketContext.Provider>
     )

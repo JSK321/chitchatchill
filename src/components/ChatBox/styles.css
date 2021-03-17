@@ -8,7 +8,7 @@
 
 .cardHeader {
     background: none;
-    background-color:aliceblue;
+    /* background-color:aliceblue; */
 }
 
 .chatDisplay {
@@ -36,6 +36,7 @@
 
 .editChatMessage {
     resize: none;
+    border: 1px solid grey;
 }
 
 .saveBtn, .saveBtn:link, .saveBtn:hover, .saveBtn:active, .saveBtn:focus, .saveBtn:visited {

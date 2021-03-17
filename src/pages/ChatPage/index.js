@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSocket } from '../../contexts/SocketProvider';
 import API from '../../utils/API';
 import ChatBox from '../../components/ChatBox';
 
@@ -35,6 +36,8 @@ export default function ChatPage() {
     const [newMessageState, setNewMessageState] = useState({
         newMessages: []
     });
+    // Socket.io
+    const socket = useSocket()
     // Param of id on chatroom
     const { id } = useParams();
 
@@ -178,6 +181,7 @@ export default function ChatPage() {
     // Function to post new message in chatroom
     const handleSendMessage = event => {
         event.preventDefault();
+        // socket.emit('send-message', )
         API.createMessage(userState.token, chatState).then(res => {
             // getAllMessages();
             let createdMessage = res
@@ -205,21 +209,21 @@ export default function ChatPage() {
     };
 
     return (
-        <ChatBox
-            // States
-            roomName={chatRoomState.roomName}
-            message={chatState.message}
-            messages={messageState.messages}
-            editMessage={editChatState.editMessage}
-            accountName={userState.accountName}
-            // Handle Events
-            handleInputChange={handleInputChange}
-            handleEditMessage={handleEditMessage}
-            handleSaveBtn={handleSaveBtn}
-            handleCancelBtn={handleCancelBtn}
-            handleSendMessage={handleSendMessage}
-            handleEditInputChange={handleEditInputChange}
-            handleDeleteMessage={handleDeleteMessage}
-        />
+            <ChatBox
+                // States
+                roomName={chatRoomState.roomName}
+                message={chatState.message}
+                messages={messageState.messages}
+                editMessage={editChatState.editMessage}
+                accountName={userState.accountName}
+                // Handle Events
+                handleInputChange={handleInputChange}
+                handleEditMessage={handleEditMessage}
+                handleSaveBtn={handleSaveBtn}
+                handleCancelBtn={handleCancelBtn}
+                handleSendMessage={handleSendMessage}
+                handleEditInputChange={handleEditInputChange}
+                handleDeleteMessage={handleDeleteMessage}
+            />
     );
 };

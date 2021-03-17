@@ -1,13 +1,23 @@
 import React from 'react'
+import { useTheme } from '../../contexts/ThemeContext'
 import { Card, Form, ListGroup, Button, ButtonGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faReply } from '@fortawesome/free-solid-svg-icons'
 import "./styles.css"
 
 export default function ChatBox(props) {
+    // Theme Context
+    const darkTheme = useTheme()
+    const themeStyles = {
+        backgroundColor: darkTheme ? '#333' : '#CCC',
+        color: darkTheme ? '#CCC' : '#333',
+    }
 
     return (
-        <Card className="chatBox">
+        <Card
+            className="chatBox"
+            style={themeStyles}
+        >
             <Card.Header className="cardHeader">{props.roomName}</Card.Header>
             <ListGroup className="chatDisplay">
                 {!props.messages || props.messages < 1 ?
@@ -17,6 +27,7 @@ export default function ChatBox(props) {
                         <ListGroup.Item
                             key={data.id}
                             className="chatMessage"
+                            style={themeStyles}
                         >
                             {/* User Account Name */}
                             <strong>{data.userName}</strong>
@@ -36,11 +47,11 @@ export default function ChatBox(props) {
                                 />
                                 :
                                 <FontAwesomeIcon
-                                icon={faReply}
-                                className="editIcon"
-                                // onClick={props.handleEditMessage}m
-                                id={data.id}
-                            />
+                                    icon={faReply}
+                                    className="editIcon"
+                                    // onClick={props.handleEditMessage}m
+                                    id={data.id}
+                                />
                             }
                             {/* Chat Message */}
                             <p
@@ -63,6 +74,7 @@ export default function ChatBox(props) {
                                     name="editMessage"
                                     value={props.editMessage}
                                     onChange={props.handleEditInputChange}
+                                    style={themeStyles}
                                 />
                                 {/* Save Button */}
                                 <Button
@@ -78,7 +90,7 @@ export default function ChatBox(props) {
                                         onClick={props.handleDeleteMessage}
                                         className="CancelOrDelete"
                                         size="sm"
-                                        style={{color:"red"}}
+                                        style={{ color: "red" }}
                                     >
                                         Delete
                                     </Button>
@@ -100,7 +112,6 @@ export default function ChatBox(props) {
             {/* Send Message Form */}
             <Form
                 onSubmit={props.handleSendMessage}
-                className="sendMessageInput"
             >
                 <Form.Control
                     type="text"
@@ -109,6 +120,7 @@ export default function ChatBox(props) {
                     value={props.message}
                     onChange={props.handleInputChange}
                     autoComplete="off"
+                    style={themeStyles}
                 />
             </Form>
 
