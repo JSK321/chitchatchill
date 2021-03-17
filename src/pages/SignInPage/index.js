@@ -35,13 +35,12 @@ export default function SignInPage() {
     };
 
     return (
-        <div>
-            <SignInForm
-                email={signInState.email}
-                password={signInState.password}
-                handleInputChange={handleInputChange}
-                handleFormSubmit={handleFormSubmit}
-            />
-        </div>
+        <SignInForm
+            email={signInState.email}
+            password={signInState.password}
+            handleInputChange={handleInputChange}
+            handleFormSubmit={handleFormSubmit}
+        />
+
     );
 };
