@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSocket } from '../../contexts/SocketProvider';
 import API from '../../utils/API';
 import ChatBox from '../../components/ChatBox';
+
 
 export default function ChatPage() {
     // useState of chatroom
@@ -34,6 +36,8 @@ export default function ChatPage() {
     const [newMessageState, setNewMessageState] = useState({
         newMessages: []
     });
+    // Socket.io
+    const socket = useSocket()
     // Param of id on chatroom
     const { id } = useParams();
 
@@ -177,6 +181,7 @@ export default function ChatPage() {
     // Function to post new message in chatroom
     const handleSendMessage = event => {
         event.preventDefault();
+        // socket.emit('send-message', )
         API.createMessage(userState.token, chatState).then(res => {
             // getAllMessages();
             let createdMessage = res

@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/NavBar'
 // Contexts
 import ThemeProvider from './contexts/ThemeContext'
+import { SocketProvider } from './contexts/SocketProvider'
 // Pages
 import HomePage from './pages/HomePage'
 import ChatPage from './pages/ChatPage'
@@ -61,33 +62,34 @@ function App() {
 
   return (
     <ThemeProvider>
-      
-      <Router>
-        <NavBar />
-        <Switch>
-          <Route exact path="/">
-            <HomePage
 
-            />
-          </Route>
-          <Route exact path="/:chatRoom/:id">
-            <ChatPage
+      <SocketProvider id={profileState.token}>
+        <Router>
+          <NavBar />
+          <Switch>
+            <Route exact path="/">
+              <HomePage
+                profile={profileState}
+              />
+            </Route>
+            <Route exact path="/:chatRoom/:id">
+              <ChatPage
 
-            />
-          </Route>
-          <Route exact path="/signin">
-            <SignInPage
+              />
+            </Route>
+            <Route exact path="/signin">
+              <SignInPage
 
-            />
-          </Route>
-          <Route exact path="/signup">
-            <SignUpPage
+              />
+            </Route>
+            <Route exact path="/signup">
+              <SignUpPage
 
-            />
-          </Route>
-        </Switch>
-      </Router>
-
+              />
+            </Route>
+          </Switch>
+        </Router>
+      </SocketProvider>
 
     </ThemeProvider>
   );

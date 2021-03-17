@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Card, Container, ButtonGroup, ListGroup, Form } from 'react-bootstrap'
+import { Card, Container, ButtonGroup, ListGroup } from 'react-bootstrap'
 import { useTheme } from '../../contexts/ThemeContext'
 import CreateChatModal from '../../components/CreateChatModal'
 import API from '../../utils/API';
@@ -17,7 +17,7 @@ export default function HomePage(props) {
     })
     // Theme Context
     const darkTheme = useTheme()
-  
+
     const themeStyles = {
         backgroundColor: darkTheme ? '#333' : '#CCC',
         color: darkTheme ? '#CCC' : '#333',
@@ -26,7 +26,6 @@ export default function HomePage(props) {
     useEffect(() => {
         getAllChatRooms()
     }, [])
-
 
     function getAllChatRooms() {
         API.getAllChatrooms().then(data => {
@@ -49,7 +48,7 @@ export default function HomePage(props) {
             API.createChatRoom(props.profile.token, {
                 ...chatRoomState
             }).then(afterCreate => {
-                window.location.reload()
+                getAllChatRooms()
             })
         };
     };
@@ -65,7 +64,12 @@ export default function HomePage(props) {
                 </Card.Header>
                 <ListGroup>
                     {!roomState.chatRooms || roomState.chatRooms < 1 ?
-                        <ListGroup.Item>No Rooms available</ListGroup.Item>
+                        <ListGroup.Item
+                            className="chatrooms"
+                            style={themeStyles}
+                        >
+                            No Rooms available
+                        </ListGroup.Item>
                         :
                         roomState.chatRooms.map(data => (
                             <ListGroup.Item
