@@ -26,6 +26,11 @@ const API = {
         return fetch(`${URL_PREFIX}/api/users`, {
         }).then(res => res.json()).catch(err => console.log(err))
     },
+    // Get One Profile Function
+    getOneProfile: function (accountName) {
+        return fetch(`${URL_PREFIX}/api/users/${accountName}`, {
+        }).then(res => res.json()).catch(err => console.log(err))
+    },
     // Get One Chat Room by Id Function
     getOneChatRoom: function (id) {
         return fetch(`${URL_PREFIX}/api/chatrooms/${id}`, {

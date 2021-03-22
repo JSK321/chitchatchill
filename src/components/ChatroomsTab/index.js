@@ -80,7 +80,7 @@ export default function ChatroomsTab() {
                         style={themeStyles}
                     >
                         No Rooms available
-                </ListGroup.Item>
+                    </ListGroup.Item>
                     :
                     chatRoomState.chatRooms.map(data => (
                         <ListGroup.Item

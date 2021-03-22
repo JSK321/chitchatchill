@@ -33,7 +33,7 @@ export default function ContactsTab() {
             style={themeStyles}
         >
             <Card.Header style={{ textAlign: "center" }}>
-                Different component names
+                Title
             </Card.Header>
             <Tab.Container defaultActiveKey="#link1">
                 <Row>
