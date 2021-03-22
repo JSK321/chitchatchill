@@ -41,6 +41,5 @@ export default function SignInPage() {
             handleInputChange={handleInputChange}
             handleFormSubmit={handleFormSubmit}
         />
-
     );
 };

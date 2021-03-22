@@ -1,18 +1,10 @@
-.homeContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1rem;
-
-}
-
 .homeCard {
-    width: 40rem;
+    /* width: 40rem; */
     height: 40rem;
     /* border: 1px solid black; */
 }
 
-.homeButtons {
+.homeTabs{
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -22,7 +14,13 @@
     border: 1px solid red
 }
 
-.homeNavs {
-    /* width: 100%; */
 
+@media screen and (max-width: 500px){
+    .homeContainer {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        /* margin-top: 1rem; */
+    
+    }
 }

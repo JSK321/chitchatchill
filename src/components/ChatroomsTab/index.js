@@ -70,12 +70,9 @@ export default function ChatroomsTab() {
 
     return (
         <Card
-            className="homeCard"
-            style={themeStyles}
+            className="chatRoomsTabCard rounded-0"
+            style={themeStyles} rounded-0
         >
-            <Card.Header>
-                Chat Rooms
-            </Card.Header>
             <ListGroup>
                 {!chatRoomState.chatRooms || chatRoomState.chatRooms < 1 ?
                     <ListGroup.Item
@@ -100,13 +97,13 @@ export default function ChatroomsTab() {
                     ))
                 }
             </ListGroup>
-            <ButtonGroup vertical className="homeButtons">
+            {/* <ButtonGroup vertical className="homeButtons"> */}
                 <CreateChatModal
                     roomName={createChatRoomState.roomName}
                     handleInputChange={handleInputChange}
                     handleCreateChatRoom={handleCreateChatRoom}
                 />
-            </ButtonGroup>
+            {/* </ButtonGroup> */}
         </Card>
     );
 };

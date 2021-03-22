@@ -1,0 +1,18 @@
+.contactsTabCard {
+    /* width: 25rem; */
+    height: 40rem;
+}
+
+.friendsTabs {
+    position:absolute;
+    bottom: 0;
+    width: 100%;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+}
+
+@media screen and (max-width: 400px){
+    .list-group-item {
+        padding: .75rem .5rem;
+    }
+}

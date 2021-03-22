@@ -1,5 +1,9 @@
+// React
 import React, { useState } from 'react'
-import { Modal, Form, Button } from 'react-bootstrap'
+// Bootstrap
+import { Modal, Form, Button, ListGroup } from 'react-bootstrap'
+// Contexts
+import { useTheme } from '../../contexts/ThemeContext'
 import "./styles.css"
 
 export default function CreateChatModal(props) {
@@ -7,21 +11,22 @@ export default function CreateChatModal(props) {
 
     const handleOnHide = () => setModalShow(false);
 
-    function checkChatRoomName() {
-        if(props.roomName === "") {
-            console.log("here")
-        }
+    // Theme Context
+    const darkTheme = useTheme()
+    const themeStyles = {
+        backgroundColor: darkTheme ? '#333' : '#CCC',
+        color: darkTheme ? '#CCC' : '#333',
     }
 
     return (
         <>
-            <Button 
-            className="rounded-0"
-            variant="primary" 
-            onClick={() => setModalShow(true)}
+            <ListGroup.Item
+                className="createChatBtn rounded-0"
+                style={themeStyles}
+                onClick={() => setModalShow(true)}
             >
                 Create Chat Room
-            </Button>
+            </ListGroup.Item>
 
             <Modal
                 show={modalShow}
@@ -40,7 +45,7 @@ export default function CreateChatModal(props) {
                         name="roomName"
                         value={props.roomName}
                         onChange={props.handleInputChange}
-                        // required
+                    // required
                     />
                     <Button
                         className="modalBtns rounded-0"
