@@ -1,5 +1,5 @@
 // React
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 // import { Link } from 'react-router-dom'
 // Bootstrap
 import { Card, ListGroup, Tab, Row, Col } from 'react-bootstrap'
@@ -12,7 +12,9 @@ import { useProfile, useProfileData } from '../../contexts/ProfileContext'
 // CSS
 import "./styles.css"
 
-export default function ContactsTab() {
+export default function HomePage() {
+    // Tab Title State
+    const [tabState, setTabState] = useState('Friends')
     // Profile Context
     const profileState = useProfile()
     const profileData = useProfileData()
@@ -27,13 +29,18 @@ export default function ContactsTab() {
         profileData()
     }, [])
 
+    const handleTabSelect = event => {
+        event.preventDefault();
+        setTabState(event.target.name)
+    }
+
     return (
         <Card
             className="homeCard rounded-0"
             style={themeStyles}
         >
             <Card.Header style={{ textAlign: "center" }}>
-                Title
+               {tabState}
             </Card.Header>
             <Tab.Container defaultActiveKey="#link1">
                 <Row>
@@ -54,13 +61,33 @@ export default function ContactsTab() {
                     </Col>
                 </Row>
                 <ListGroup horizontal className="homeTabs">
-                    <ListGroup.Item action href="#link1" className="rounded-0" style={themeStyles}>
+                    <ListGroup.Item
+                        action href="#link1"
+                        className="rounded-0"
+                        style={themeStyles}
+                        name="Friends"
+                        onClick={handleTabSelect}
+                    >
                         Friends
                     </ListGroup.Item>
-                    <ListGroup.Item action href="#link2" className="rounded-0" style={themeStyles}>
-                        Chatrooms
+
+                    <ListGroup.Item
+                        action href="#link2"
+                        className="rounded-0"
+                        style={themeStyles}
+                        name="Messages"
+                        onClick={handleTabSelect}
+                    >
+                        Messages
                      </ListGroup.Item>
-                    <ListGroup.Item action href="#link3" className="rounded-0" style={themeStyles}>
+
+                    <ListGroup.Item
+                        action href="#link3"
+                        className="rounded-0"
+                        style={themeStyles}
+                        name="Add Friend"
+                        onClick={handleTabSelect}
+                    >
                         Add Friend
                      </ListGroup.Item>
                 </ListGroup>
