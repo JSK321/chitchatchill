@@ -6,6 +6,7 @@ import API from '../../utils/API';
 import { Card, InputGroup, ListGroup, Form, FormControl } from 'react-bootstrap'
 // Contexts
 import { useTheme } from '../../contexts/ThemeContext'
+import { useProfile, useProfileData } from '../../contexts/ProfileContext'
 // CSS
 import "./styles.css"
 
@@ -16,6 +17,19 @@ export default function SearchFriends() {
     const [searchState, setSearchState] = useState({
         search: ""
     })
+    // Profile Context
+    const profileState = useProfile()
+    const profileData = useProfileData()
+    // Theme Context
+    const darkTheme = useTheme()
+    const themeStyles = {
+        backgroundColor: darkTheme ? '#333' : '#CCC',
+        color: darkTheme ? '#CCC' : '#333',
+    }
+
+    useEffect(() => {
+        profileData()
+    }, [])
 
     const handleSearchInput = event => {
         event.preventDefault();
@@ -47,11 +61,11 @@ export default function SearchFriends() {
         }
     }
 
-    // Theme Context
-    const darkTheme = useTheme()
-    const themeStyles = {
-        backgroundColor: darkTheme ? '#333' : '#CCC',
-        color: darkTheme ? '#CCC' : '#333',
+    const handleAddContacts = event => {
+        event.preventDefault();
+        API.addContact(profileState.token, userState.user).then(res => {
+            console.log(res)
+        })
     }
 
     return (
@@ -76,12 +90,13 @@ export default function SearchFriends() {
                 )
                 :
                 < Card className="userCard">
-                    < Card.Img variant="top" src={userState.profileImage} />
+                    <Card.Img variant="top" src={userState.profileImage} />
                     <Card.Body>
-                        <Card.Title>{userState.user.accountName}</Card.Title>
+                        <Card.Title style={{ textAlign: "center" }}>User: {userState.user.accountName}</Card.Title>
                         <ListGroup>
-                            <ListGroup.Item>{userState.user.name}</ListGroup.Item>
-                            <ListGroup.Item>{userState.user.id}</ListGroup.Item>
+                            <ListGroup.Item>Name: {userState.user.name}</ListGroup.Item>
+                            <ListGroup.Item>ID: {userState.user.id}</ListGroup.Item>
+                            <ListGroup.Item action onClick={handleAddContacts}>Add To Contacts</ListGroup.Item>
                         </ListGroup>
                     </Card.Body>
                 </Card>

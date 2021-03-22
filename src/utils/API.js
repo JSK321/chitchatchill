@@ -104,6 +104,23 @@ const API = {
             }
         }).catch(err => console.log(err))
     },
+    // Add To Contacts Function
+    addContact: function (token, data) {
+        return fetch(`${URL_PREFIX}/api/contacts`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(data)
+        }).then(res => {
+            if (res.ok) {
+                return res.json()
+            } else {
+                throw new Error("Something went wrong")
+            }
+        }).catch(err => console.log(err))
+    },
     // Update Specific Message Function
     updateOneMessage: function (token, id, data) {
         return fetch(`${URL_PREFIX}/api/chitchats/message/${id}`, {
