@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 // Bootstrap
 import { Card, ListGroup, Tab, Row, Col } from 'react-bootstrap'
 // Components
+import ContactsTab from '../../components/ContactsTab'
 import ChatroomsTab from '../../components/ChatroomsTab'
 import SearchFriends from '../../components/SearchFriends'
 // Contexts
@@ -40,16 +41,14 @@ export default function HomePage() {
             style={themeStyles}
         >
             <Card.Header style={{ textAlign: "center" }}>
-               {tabState}
+                {tabState}
             </Card.Header>
             <Tab.Container defaultActiveKey="#link1">
                 <Row>
                     <Col>
                         <Tab.Content>
                             <Tab.Pane eventKey="#link1">
-                                <ListGroup.Item>
-                                    Hello
-                                </ListGroup.Item>
+                                <ContactsTab />
                             </Tab.Pane>
                             <Tab.Pane eventKey="#link2">
                                 <ChatroomsTab />

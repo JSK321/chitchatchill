@@ -71,7 +71,7 @@ export default function ChatroomsTab() {
     return (
         <Card
             className="chatRoomsTabCard rounded-0"
-            style={themeStyles} rounded-0
+            style={themeStyles}
         >
             <ListGroup>
                 {!chatRoomState.chatRooms || chatRoomState.chatRooms < 1 ?

@@ -51,6 +51,16 @@ const API = {
         return fetch(`${URL_PREFIX}/api/chitchats/message/${id}`, {
         }).then(res => res.json()).catch(err => console.log(err))
     },
+    // Get All Contacts Function
+    getAllContacts: function (token) {
+        return fetch(`${URL_PREFIX}/api/contacts`, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`
+            },
+        }).then(res => res.json()).catch(err => console.log(err))
+    },
     // Create New User Function
     createNewUser: function (data) {
         return fetch(`${URL_PREFIX}/api/users`, {
