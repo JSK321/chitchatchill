@@ -79,6 +79,7 @@ export default function SearchFriends() {
                     placeholder="Search"
                     className="rounded-0"
                     onChange={handleSearchInput}
+                    style={themeStyles}
                 />
             </Form>
             {!userState.user

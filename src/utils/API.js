@@ -31,9 +31,14 @@ const API = {
         return fetch(`${URL_PREFIX}/api/users/${accountName}`, {
         }).then(res => res.json()).catch(err => console.log(err))
     },
-    // Get One Chat Room by Id Function
-    getOneChatRoom: function (id) {
+    // Get One Chat Room by id Function
+    getOneChatRoomById: function (id) {
         return fetch(`${URL_PREFIX}/api/chatrooms/${id}`, {
+        }).then(res => res.json()).catch(err => console.log(err))
+    },
+    // Get One Chat Room by Name Function
+    getOneChatRoomByName: function (name) {
+        return fetch(`${URL_PREFIX}/api/chatrooms/dm/${name}`, {
         }).then(res => res.json()).catch(err => console.log(err))
     },
     // Get All Chat Rooms Function

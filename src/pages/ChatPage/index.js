@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import { useSocket } from '../../contexts/SocketProvider';
 import API from '../../utils/API';
 import ChatBox from '../../components/ChatBox';
+import ContactsBox from '../../components/ContactsBox';
 
 
 export default function ChatPage() {
@@ -38,9 +39,9 @@ export default function ChatPage() {
     });
     // Socket.io
     const socket = useSocket()
-    // Param of id on chatroom
+    // Param of name and id on chatroom
     const { id } = useParams();
-
+  
     // Find user data and chatroom data on load
     useEffect(() => {
         userData();
@@ -71,7 +72,7 @@ export default function ChatPage() {
     };
     // Function to find chatroom data
     function findChatRoom() {
-        API.getOneChatRoom(id).then(data => {
+        API.getOneChatRoomById(id).then(data => {
             setChatRoomState({
                 roomName: data.roomName,
                 id: data.id
@@ -209,6 +210,8 @@ export default function ChatPage() {
     };
 
     return (
+        <>
+            <ContactsBox />
             <ChatBox
                 // States
                 roomName={chatRoomState.roomName}
@@ -225,5 +228,6 @@ export default function ChatPage() {
                 handleEditInputChange={handleEditInputChange}
                 handleDeleteMessage={handleDeleteMessage}
             />
+        </>
     );
 };

@@ -12,6 +12,9 @@ import { useTheme } from '../../contexts/ThemeContext'
 import { useProfile, useProfileData } from '../../contexts/ProfileContext'
 // CSS
 import "./styles.css"
+// FontAwesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUserFriends, faUserPlus, faCommentAlt, faCog } from '@fortawesome/free-solid-svg-icons'
 
 export default function HomePage() {
     // Tab Title State
@@ -32,7 +35,7 @@ export default function HomePage() {
 
     const handleTabSelect = event => {
         event.preventDefault();
-        setTabState(event.target.name)
+        setTabState(event.currentTarget.name)
     }
 
     return (
@@ -48,13 +51,16 @@ export default function HomePage() {
                     <Col>
                         <Tab.Content>
                             <Tab.Pane eventKey="#link1">
-                                <ContactsTab />
+                                <ChatroomsTab />
                             </Tab.Pane>
                             <Tab.Pane eventKey="#link2">
-                                <ChatroomsTab />
+                                <ContactsTab />
                             </Tab.Pane>
                             <Tab.Pane eventKey="#link3">
                                 <SearchFriends />
+                            </Tab.Pane>
+                            <Tab.Pane eventKey="#link4">
+                                Settings
                             </Tab.Pane>
                         </Tab.Content>
                     </Col>
@@ -62,33 +68,42 @@ export default function HomePage() {
                 <ListGroup horizontal className="homeTabs">
                     <ListGroup.Item
                         action href="#link1"
-                        className="rounded-0"
-                        style={themeStyles}
-                        name="Friends"
-                        onClick={handleTabSelect}
-                    >
-                        Friends
-                    </ListGroup.Item>
-
-                    <ListGroup.Item
-                        action href="#link2"
-                        className="rounded-0"
+                        className="homeTabIcons rounded-0"
                         style={themeStyles}
                         name="Messages"
                         onClick={handleTabSelect}
                     >
-                        Messages
-                     </ListGroup.Item>
+                        <FontAwesomeIcon icon={faCommentAlt} name="Messages"/>
+                    </ListGroup.Item>
+
+                    <ListGroup.Item
+                        action href="#link2"
+                        className="homeTabIcons rounded-0"
+                        style={themeStyles}
+                        name="Friends"
+                        onClick={handleTabSelect}
+                    >
+                        <FontAwesomeIcon icon={faUserFriends} name="Friends"/>
+                    </ListGroup.Item>
 
                     <ListGroup.Item
                         action href="#link3"
-                        className="rounded-0"
+                        className="homeTabIcons rounded-0"
                         style={themeStyles}
                         name="Add Friend"
                         onClick={handleTabSelect}
                     >
-                        Add Friend
-                     </ListGroup.Item>
+                        <FontAwesomeIcon icon={faUserPlus} name="Add Friend"/>
+                    </ListGroup.Item>
+                    <ListGroup.Item
+                        action href="#link4"
+                        className="homeTabIcons rounded-0"
+                        style={themeStyles}
+                        name="Settings"
+                        onClick={handleTabSelect}
+                    >
+                        <FontAwesomeIcon icon={faCog} name="Settings"/>
+                    </ListGroup.Item>
                 </ListGroup>
             </Tab.Container>
         </Card>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTheme } from '../../contexts/ThemeContext'
-import { Card, Form, ListGroup, Button, ButtonGroup } from 'react-bootstrap'
+import { Card, Form, ListGroup, Button, ButtonGroup, Dropdown } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faReply } from '@fortawesome/free-solid-svg-icons'
 import "./styles.css"
@@ -18,7 +18,9 @@ export default function ChatBox(props) {
             className="chatBox"
             style={themeStyles}
         >
-            <Card.Header className="cardHeader">{props.roomName}</Card.Header>
+            <Card.Header className="cardHeader">
+                {props.roomName}
+            </Card.Header>
             <ListGroup className="chatDisplay">
                 {!props.messages || props.messages < 1 ?
                     <p>No Messages</p>
@@ -49,7 +51,7 @@ export default function ChatBox(props) {
                                 <FontAwesomeIcon
                                     icon={faReply}
                                     className="editIcon"
-                                    // onClick={props.handleEditMessage}m
+                                    // onClick={props.handleEditMessage}
                                     id={data.id}
                                 />
                             }
@@ -124,7 +126,6 @@ export default function ChatBox(props) {
                     className="rounded-0"
                 />
             </Form>
-
         </Card>
     );
 };

@@ -73,10 +73,15 @@ export default function ChatroomsTab() {
             className="chatRoomsTabCard rounded-0"
             style={themeStyles}
         >
+            <CreateChatModal
+                roomName={createChatRoomState.roomName}
+                handleInputChange={handleInputChange}
+                handleCreateChatRoom={handleCreateChatRoom}
+            />
             <ListGroup>
                 {!chatRoomState.chatRooms || chatRoomState.chatRooms < 1 ?
                     <ListGroup.Item
-                        className="chatrooms"
+                        className="chatroomsTab"
                         style={themeStyles}
                     >
                         No Rooms available
@@ -86,7 +91,7 @@ export default function ChatroomsTab() {
                         <ListGroup.Item
                             key={data.id}
                             style={themeStyles}
-                            className="chatrooms"
+                            className="chatroomsTab"
                         >
                             <Link
                                 to={`/${data.roomName}/${data.id}`}
@@ -97,13 +102,6 @@ export default function ChatroomsTab() {
                     ))
                 }
             </ListGroup>
-            {/* <ButtonGroup vertical className="homeButtons"> */}
-                <CreateChatModal
-                    roomName={createChatRoomState.roomName}
-                    handleInputChange={handleInputChange}
-                    handleCreateChatRoom={handleCreateChatRoom}
-                />
-            {/* </ButtonGroup> */}
         </Card>
     );
 };

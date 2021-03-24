@@ -10,10 +10,9 @@
     width: 100%;
 }
 
-.chatrooms {
-    border: 1px solid red
+.homeTabIcons {
+    text-align: center;
 }
-
 
 @media screen and (max-width: 500px){
     .homeContainer {
