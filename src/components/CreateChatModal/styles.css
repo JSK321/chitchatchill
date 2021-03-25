@@ -1,3 +1,12 @@
 .modalBtns {
     width: 100%;
 }
+
+.createChatBtn {
+    /* width: 100%; */
+    border: 1px solid lightblue;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    
+}

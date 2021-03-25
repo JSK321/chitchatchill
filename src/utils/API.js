@@ -26,9 +26,19 @@ const API = {
         return fetch(`${URL_PREFIX}/api/users`, {
         }).then(res => res.json()).catch(err => console.log(err))
     },
-    // Get One Chat Room by Id Function
-    getOneChatRoom: function (id) {
+    // Get One Profile Function
+    getOneProfile: function (accountName) {
+        return fetch(`${URL_PREFIX}/api/users/${accountName}`, {
+        }).then(res => res.json()).catch(err => console.log(err))
+    },
+    // Get One Chat Room by id Function
+    getOneChatRoomById: function (id) {
         return fetch(`${URL_PREFIX}/api/chatrooms/${id}`, {
+        }).then(res => res.json()).catch(err => console.log(err))
+    },
+    // Get One Chat Room by Name Function
+    getOneChatRoomByName: function (name) {
+        return fetch(`${URL_PREFIX}/api/chatrooms/dm/${name}`, {
         }).then(res => res.json()).catch(err => console.log(err))
     },
     // Get All Chat Rooms Function
@@ -44,6 +54,16 @@ const API = {
     // Get One Message in Chat Function
     getOneMessage: function (id) {
         return fetch(`${URL_PREFIX}/api/chitchats/message/${id}`, {
+        }).then(res => res.json()).catch(err => console.log(err))
+    },
+    // Get All Contacts Function
+    getAllContacts: function (token) {
+        return fetch(`${URL_PREFIX}/api/contacts`, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`
+            },
         }).then(res => res.json()).catch(err => console.log(err))
     },
     // Create New User Function
@@ -96,6 +116,23 @@ const API = {
                 return res.json()
             } else {
                 throw new Error("Something went wrong");
+            }
+        }).catch(err => console.log(err))
+    },
+    // Add To Contacts Function
+    addContact: function (token, data) {
+        return fetch(`${URL_PREFIX}/api/contacts`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(data)
+        }).then(res => {
+            if (res.ok) {
+                return res.json()
+            } else {
+                throw new Error("Something went wrong")
             }
         }).catch(err => console.log(err))
     },

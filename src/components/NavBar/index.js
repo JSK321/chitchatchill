@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useTheme, useThemeUpdate } from '../../contexts/ThemeContext'
-import { Navbar, Nav, NavDropdown, Button, Form } from 'react-bootstrap'
-import "./styles.css"
+import { Navbar, Nav, Dropdown, InputGroup } from 'react-bootstrap'
+// import "./styles.css"
 
-export default function NavBar(props) {
+export default function NavBar() {
     const darkTheme = useTheme()
     const toggleTheme = useThemeUpdate()
 
@@ -14,17 +14,24 @@ export default function NavBar(props) {
     }
 
     return (
-        <Navbar expand="lg" className="NavBar" style={themeStyles}>
-            <Navbar.Brand><Link to="/">Home</Link></Navbar.Brand>
-            <Navbar.Brand><Link to="signin">Sign In</Link></Navbar.Brand>
-            <Navbar.Brand><Link to="/signup">Sign Up</Link></Navbar.Brand>
-            
-            <Navbar.Text style={{color:"slateblue"}}>
-                <Form.Check type="checkbox" label="Toggle" onClick={toggleTheme} />
-            </Navbar.Text>
-
+        <Navbar expand="lg-md-sm">
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav>
+                    <Nav.Item>
+                        <Link to="/">Home</Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Link to="signin">Sign In</Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Link to="/signup">Sign Up</Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <p style={{ cursor: "pointer" }} onClick={toggleTheme}>Toggle Theme</p>
+                    </Nav.Item>
+                </Nav>
+            </Navbar.Collapse>
         </Navbar>
     )
 }
-
-
