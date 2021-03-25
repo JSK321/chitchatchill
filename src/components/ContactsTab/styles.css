@@ -1,6 +1,7 @@
 .contactsLI {
   border: 1px solid pink;
   width: 50%;
+  cursor: pointer;
 }
 
 .dmIcon {

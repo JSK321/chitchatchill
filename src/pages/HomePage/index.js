@@ -18,7 +18,7 @@ import { faUserFriends, faUserPlus, faCommentAlt, faCog } from '@fortawesome/fre
 
 export default function HomePage() {
     // Tab Title State
-    const [tabState, setTabState] = useState('Friends')
+    const [tabState, setTabState] = useState('Messages')
     // Profile Context
     const profileState = useProfile()
     const profileData = useProfileData()

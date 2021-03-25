@@ -20,6 +20,7 @@ export default function ContactsTab() {
     const [contactState, setContactState] = useState({
         contacts: []
     })
+    // Contact Ref
     const contactRef = useRef()
     // Profile Context
     const profileState = useProfile()
@@ -86,6 +87,7 @@ export default function ContactsTab() {
                             className="contactsLI"
                             style={themeStyles}
                             ref={contactRef}
+                            onClick={handleDM}
                         >
                             {data.accountName}
                             <FontAwesomeIcon
